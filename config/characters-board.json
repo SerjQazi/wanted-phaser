@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "character-board.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 440,
+				"h": 122
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "luigi-board",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 110,
+						"h": 122
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					}
+				},
+				{
+					"filename": "mario-board",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 110,
+						"h": 122
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					},
+					"frame": {
+						"x": 110,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					}
+				},
+				{
+					"filename": "wario-board",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 110,
+						"h": 122
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					},
+					"frame": {
+						"x": 220,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					}
+				},
+				{
+					"filename": "yoshi-board",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 110,
+						"h": 122
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					},
+					"frame": {
+						"x": 330,
+						"y": 0,
+						"w": 110,
+						"h": 122
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:69771f8a7fd1999934378b0bb91d01d0:b4c19f1b0215a8214364632d63ad7766:63a6609c38fd912c15e482e8214ee128$"
+	}
+}

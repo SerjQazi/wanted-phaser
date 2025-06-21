@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+
+  .character-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 75px);
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .game-character {
+    width: 70px;
+    height: 70px;
+  }

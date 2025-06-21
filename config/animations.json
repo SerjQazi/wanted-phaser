@@ -1,0 +1,75 @@
+{
+	"anims":[
+	{
+		"key": "mario",
+		"frames": [
+		{
+			"key": "mario",
+			"frame": "mario"
+		}],
+		"repeat": -1
+	},
+	{
+		"key": "luigi",
+		"frames": [
+		{
+			"key": "luigi",
+			"frame": "luigi"
+		}], 
+		"repeat": -1
+	},
+	{
+		"key": "yoshi",
+		"frames": [
+		{
+			"key": "yoshi",
+			"frame": "yoshi"
+		}], 
+		"repeat": -1
+	},
+	{
+		"key": "wario",
+		"frames": [
+		{
+			"key": "wario",
+			"frame": "wario"
+		}], 
+		"repeat": -1
+	},
+	{
+		"key": "mario-board",
+		"frames": [
+		{
+			"key": "mario-board",
+			"frame": "mario-board"
+		}], 
+		"repeat": -1
+	},
+	{
+		"key": "luigi-board",
+		"frames": [
+		{
+			"key": "luigi-board",
+			"frame": "luigi-board"
+		}], 
+		"repeat": -1
+	},
+	{
+		"key": "yoshi-board",
+		"frames": [
+		{
+			"key": "yoshi-board",
+			"frame": "yoshi-board"
+		}], 
+		"repeat": -1
+	},
+	{
+		"key": "wario-board",
+		"frames": [
+		{
+			"key": "wario-board",
+			"frame": "wario-board"
+		}], 
+		"repeat": -1
+	}
+]}

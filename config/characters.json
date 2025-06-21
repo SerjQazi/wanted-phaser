@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "character.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 212,
+				"h": 64
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "luigi",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 64
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 64
+					}
+				},
+				{
+					"filename": "mario",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 56,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 56,
+						"h": 64
+					},
+					"frame": {
+						"x": 50,
+						"y": 0,
+						"w": 56,
+						"h": 64
+					}
+				},
+				{
+					"filename": "wario",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 60,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 60,
+						"h": 64
+					},
+					"frame": {
+						"x": 106,
+						"y": 0,
+						"w": 60,
+						"h": 64
+					}
+				},
+				{
+					"filename": "yoshi",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 46,
+						"h": 64
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 46,
+						"h": 64
+					},
+					"frame": {
+						"x": 166,
+						"y": 0,
+						"w": 46,
+						"h": 64
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:cdfd7728ff15d5da03a0e0da8a013950:5fbff9ad902c7d3313b787b58f5bcc19:42e475aa4a03af306bdc7acb5ff91d19$"
+	}
+}
