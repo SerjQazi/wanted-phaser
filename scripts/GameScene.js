@@ -50,11 +50,29 @@ export default class GameScene extends Phaser.Scene {
 			font: 'mariofont'
 		});
 
+		// Load high score from localStorage
+		this.highScore = parseInt(localStorage.getItem('highScore')) || 0;
+		this.highScoreText = this.add.bitmapText(190, 45, 'mariofont', 'Best: ' + this.formatScore(this.highScore), 20).setOrigin(0, 0);
+		// 🔘 Reset High Score Button
+		this.resetButton = this.add.bitmapText(215, 345, 'mariofont', 'RESET', 20)
+			.setOrigin(0, 0)
+			.setInteractive()
+			.setTint(0xff0000)
+			.setDepth(20);
+
+		this.resetButton.on('pointerdown', () => {
+			localStorage.setItem('highScore', '0');
+			this.highScore = 0;
+			this.highScoreText.setText('Best: 00');
+			console.log('🧹 High score reset');
+		});
+
+
 		this.spawnCharacters();
 	}
 
 	spawnCharacters() {
-		this.destroyCharacters(); // Clear any previous ones
+		this.destroyCharacters();
 
 		const { characterSize, padding, leftMargin, rightMargin, totalCharacters } = this.gridConfig;
 		const totalWidth = this.game.config.width;
@@ -66,7 +84,6 @@ export default class GameScene extends Phaser.Scene {
 		const startX = (totalWidth - cols * spacingX) / 2;
 		const startY = this.game.config.height - (Math.ceil(totalCharacters / cols) * spacingY) - 20;
 
-		// Choose a new wanted character
 		let newWantedIndex;
 		do {
 			newWantedIndex = Phaser.Math.Between(0, 3);
@@ -118,7 +135,15 @@ export default class GameScene extends Phaser.Scene {
 			character.setInteractive().on('pointerdown', () => {
 				if (isMatch) {
 					this.score.oneUp();
-					this.spawnCharacters(); // Spawn new set
+					
+					// ✅ High score check
+					if (this.score.currentScore > this.highScore) {
+						this.highScore = this.score.currentScore;
+						localStorage.setItem('highScore', this.highScore);
+						this.highScoreText.setText('Best: ' + this.formatScore(this.highScore));
+					}
+
+					this.spawnCharacters(); // Next round
 					console.log('✅ Correct character clicked!');
 				} else {
 					this.score.oneDown(character.x, character.y);
@@ -135,13 +160,16 @@ export default class GameScene extends Phaser.Scene {
 		if (this.wantedCharacter) this.wantedCharacter.destroy(true);
 	}
 
+	formatScore(score) {
+		return score < 10 ? '0' + score : score;
+	}
+
 	update(time, delta) {
 		if (this.timer.hasStarted() && !this.timer.isRunning) {
 			this.timer.stop();
 
-			this.destroyCharacters(); // Clean up
-
-			this.score.gameover(); // Show win/lose message
+			this.destroyCharacters();
+			this.score.gameover();
 
 			this.time.delayedCall(2000, () => {
 				this.scene.start('GameOverScene', {

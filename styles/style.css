@@ -12,3 +12,18 @@
     width: 70px;
     height: 70px;
   }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    background-color: bisque;
+    h1 {
+      font-family: 'Courier New', Courier, monospace;
+      color: darkolivegreen;
+      text-align: center;
+      letter-spacing: 8px;
+    }
+  }
