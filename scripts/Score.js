@@ -24,7 +24,8 @@ export default class Score extends Phaser.GameObjects.BitmapText
         else    
             this.setText('SCORE ' + this.currentScore);
         
-        let pointLabel = new Phaser.GameObjects.BitmapText(this.scene, this.scene.searchCharacter.x + this.scene.searchCharacter.width, this.scene.searchCharacter.y, 'mariofont', '+1', 24);
+        let pointLabel = new Phaser.GameObjects.BitmapText(this.scene, 200, 300, 'mariofont', '+1', 24);
+
         pointLabel.depth = 3;
         
         this.scene.add.existing(pointLabel);
