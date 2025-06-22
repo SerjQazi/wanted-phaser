@@ -27,15 +27,11 @@ export default class GameScene extends Phaser.Scene {
 			totalCharacters: 99
 		};
 
-		// Background
-		this.bg = new Background({
-			scene: this,
-			x: 0,
-			y: 0,
-			key: 'bg'
-		});
+		this.characterNames = ['luigi', 'mario', 'wario', 'yoshi'];
+		this.previousWantedIndex = null;
 
-		// Timer
+		this.bg = new Background({ scene: this, x: 0, y: 0, key: 'bg' });
+
 		this.timer = new Timer({
 			scene: this,
 			x: 5,
@@ -46,7 +42,6 @@ export default class GameScene extends Phaser.Scene {
 		});
 		this.timer.start();
 
-		// Score
 		this.score = new Score({
 			scene: this,
 			x: 345,
@@ -55,49 +50,36 @@ export default class GameScene extends Phaser.Scene {
 			font: 'mariofont'
 		});
 
-		// First round
 		this.spawnCharacters();
 	}
 
 	spawnCharacters() {
-		const {
-			characterSize,
-			padding,
-			leftMargin,
-			rightMargin,
-			totalCharacters
-		} = this.gridConfig;
+		this.destroyCharacters(); // Clear any previous ones
 
-		// 🔁 Destroy previous characters
-		if (this.characters) this.characters.forEach(c => c.destroy(true));
-		if (this.wantedCharacter) this.wantedCharacter.destroy(true);
-
-		// 📏 Grid math
+		const { characterSize, padding, leftMargin, rightMargin, totalCharacters } = this.gridConfig;
 		const totalWidth = this.game.config.width;
 		const spacingX = characterSize + padding;
 		const spacingY = characterSize + padding;
 		const availableWidth = totalWidth - leftMargin - rightMargin;
+
 		const cols = Math.floor(availableWidth / spacingX);
 		const startX = (totalWidth - cols * spacingX) / 2;
 		const startY = this.game.config.height - (Math.ceil(totalCharacters / cols) * spacingY) - 20;
 
-		const characterNames = ['luigi', 'mario', 'wario', 'yoshi'];
-
-		// 🔀 Ensure different wanted character than previous
+		// Choose a new wanted character
 		let newWantedIndex;
 		do {
 			newWantedIndex = Phaser.Math.Between(0, 3);
 		} while (newWantedIndex === this.previousWantedIndex);
-		this.previousWantedIndex = newWantedIndex;
 
+		this.previousWantedIndex = newWantedIndex;
 		const wantedCharacterIndex = Phaser.Math.Between(0, totalCharacters - 1);
 
-		console.log(`🎯 New wanted: ${characterNames[newWantedIndex]} (index: ${newWantedIndex})`);
+		console.log(`🎯 Wanted: ${this.characterNames[newWantedIndex]} (#${newWantedIndex})`);
 
-		// 👤 Create wanted character preview
 		this.wantedCharacter = new Characters({
 			scene: this,
-			x: (this.game.config.width / 2) - 55,
+			x: totalWidth / 2 - 55,
 			y: 110,
 			key: 'characters-board',
 			character: newWantedIndex,
@@ -113,13 +95,14 @@ export default class GameScene extends Phaser.Scene {
 			} else {
 				do {
 					charIndex = Phaser.Math.Between(0, 3);
-				} while (charIndex === newWantedIndex); // ❌ No duplicates
+				} while (charIndex === newWantedIndex);
 			}
 
 			const row = Math.floor(i / cols);
 			const col = i % cols;
 			const x = startX + col * spacingX;
 			const y = startY + row * spacingY;
+
 			const isMatch = i === wantedCharacterIndex;
 
 			const character = new Characters({
@@ -135,10 +118,11 @@ export default class GameScene extends Phaser.Scene {
 			character.setInteractive().on('pointerdown', () => {
 				if (isMatch) {
 					this.score.oneUp();
-					console.log('✅ Correct match!');
-					this.spawnCharacters();
+					this.spawnCharacters(); // Spawn new set
+					console.log('✅ Correct character clicked!');
 				} else {
-					console.log('❌ Wrong character');
+					this.score.oneDown(character.x, character.y);
+					console.log('❌ Wrong character!');
 				}
 			});
 
@@ -146,18 +130,19 @@ export default class GameScene extends Phaser.Scene {
 		}
 	}
 
+	destroyCharacters() {
+		if (this.characters) this.characters.forEach(c => c.destroy(true));
+		if (this.wantedCharacter) this.wantedCharacter.destroy(true);
+	}
+
 	update(time, delta) {
 		if (this.timer.hasStarted() && !this.timer.isRunning) {
 			this.timer.stop();
 
-			// Clean up game objects
-			this.wantedCharacter.destroy(true);
-			this.characters.forEach(c => c.destroy(true));
+			this.destroyCharacters(); // Clean up
 
-			// 🔴 Display game over message based on score
-			this.score.gameover();
+			this.score.gameover(); // Show win/lose message
 
-			// ⏱️ Delay transition to GameOverScene
 			this.time.delayedCall(2000, () => {
 				this.scene.start('GameOverScene', {
 					score: this.score.currentScore
